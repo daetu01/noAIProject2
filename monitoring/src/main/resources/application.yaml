@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: monitoring
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/monitoring
+    username: root
+    password: root1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+api:
+  seoul: ${SEOUL_API_KEY}
