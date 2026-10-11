@@ -18,12 +18,21 @@ export interface RegionEvent {
   message: string
 }
 
+/** Real Seoul Open Data population congestion levels. */
+export type CongestionLevel = '여유' | '보통' | '약간 붐빔' | '붐빔' | string
+
+export interface PopulationForecastPoint {
+  /** ISO timestamp, converted from the backend's "yyyy-MM-dd HH:mm" */
+  time: string
+  congestionLevel: CongestionLevel
+  populationMin: number
+  populationMax: number
+}
+
 export interface CityRegion {
   id: string
   name: string
   nameEn: string
-  /** placeholder-map position, percentage of container (0-100) */
-  position: { x: number; y: number }
   anomalyScore: number
   status: AnomalyStatus
   population: number
@@ -33,6 +42,9 @@ export interface CityRegion {
   temperature: number
   /** Backend only exposes a precipitation status message (PCP_MSG), not a numeric mm value. */
   weatherMessage: string
+  congestionLevel: CongestionLevel
+  congestionMessage: string
+  populationForecast: PopulationForecastPoint[]
   causeSummary: string
   updatedAt: string
   history: RegionMetricPoint[]

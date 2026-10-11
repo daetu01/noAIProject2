@@ -1,8 +1,8 @@
 package com.city.monitoring.observation.controller;
 
-import com.city.monitoring.observation.dto.ObservationDto;
-import com.city.monitoring.observation.dto.SeoulDataResponse;
-import com.city.monitoring.collector.client.SeoulOpenDataClient;
+import com.city.monitoring.observation.dto.areaApi.AreaResponse;
+import com.city.monitoring.observation.dto.seoul124Api.ObservationDto;
+import com.city.monitoring.observation.dto.seoul124Api.SeoulDataResponse;
 import com.city.monitoring.observation.service.ObservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,15 @@ public class ObservationController {
         return ResponseEntity.ok(observationService.getSeoulDataArea(reqData));
     }
 
+    @GetMapping("/area/{id}")
+    public ResponseEntity<AreaResponse.Get> getAreaResponse(@PathVariable Long id) {
+        return ResponseEntity.ok(observationService.getAreaResponse(id));
+    }
+
     @PostMapping("/index")
     public ResponseEntity<SeoulDataResponse> getSeoulDataByIndex(@RequestBody ObservationDto.RequestSeoulDataByTime reqData) {
         return ResponseEntity.ok(observationService.getSeoulDataIndex(reqData));
     }
+
+
 }

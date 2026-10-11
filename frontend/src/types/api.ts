@@ -17,9 +17,29 @@ export interface AreaSummary {
   englishName: string | null
 }
 
+export interface PopulationForecastDto {
+  FCST_TIME: string
+  FCST_CONGEST_LVL: string
+  FCST_PPLTN_MIN: number
+  FCST_PPLTN_MAX: number
+}
+
 export interface LivePopulationDto {
   AREA_PPLTN_MIN: number
   AREA_PPLTN_MAX: number
+  AREA_CONGEST_LVL: string
+  AREA_CONGEST_MSG: string
+  MALE_PPLTN_RATE: number
+  FEMALE_PPLTN_RATE: number
+  PPLTN_RATE_0: number
+  PPLTN_RATE_10: number
+  PPLTN_RATE_20: number
+  PPLTN_RATE_30: number
+  PPLTN_RATE_40: number
+  PPLTN_RATE_50: number
+  PPLTN_RATE_60: number
+  PPLTN_RATE_70: number
+  FCST_PPLTN: PopulationForecastDto[]
 }
 
 export interface AvgRoadDataDto {

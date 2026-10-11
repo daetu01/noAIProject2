@@ -7,6 +7,7 @@ import GlassPanel from '@/components/common/GlassPanel.vue'
 import SectionHeading from '@/components/common/SectionHeading.vue'
 import AnomalyTrendChart from '@/components/dashboard/AnomalyTrendChart.vue'
 import MetricsCompareChart from '@/components/dashboard/MetricsCompareChart.vue'
+import PopulationForecastChart from '@/components/dashboard/PopulationForecastChart.vue'
 import EventTimeline from '@/components/dashboard/EventTimeline.vue'
 
 const store = useRegionStore()
@@ -36,7 +37,7 @@ const accentColor = computed(() => {
     </div>
 
     <template v-else>
-      <div class="grid grid-cols-1 gap-px bg-line lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-px bg-line lg:grid-cols-3">
         <div class="min-w-0 bg-panel/70 p-4">
           <p class="mb-2 font-mono text-[10px] uppercase tracking-widest text-ink-500">Anomaly Score (24H)</p>
           <div class="h-48">
@@ -47,6 +48,15 @@ const accentColor = computed(() => {
           <p class="mb-2 font-mono text-[10px] uppercase tracking-widest text-ink-500">인구 / 교통 속도 비교</p>
           <div class="h-48">
             <MetricsCompareChart :history="region.history" />
+          </div>
+        </div>
+        <div class="min-w-0 bg-panel/70 p-4">
+          <p class="mb-2 font-mono text-[10px] uppercase tracking-widest text-ink-500">인구 예측 (FCST_PPLTN)</p>
+          <div class="h-48">
+            <PopulationForecastChart v-if="region.populationForecast.length" :forecast="region.populationForecast" />
+            <div v-else class="flex h-full items-center justify-center">
+              <p class="font-mono text-[10px] text-ink-700">예측 데이터 없음</p>
+            </div>
           </div>
         </div>
       </div>

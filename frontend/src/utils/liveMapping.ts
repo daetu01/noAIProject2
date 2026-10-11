@@ -26,14 +26,16 @@ export function buildCauseSummary(
   status: AnomalyStatus,
   roadMsg: string,
   weatherMessage: string,
+  congestionMessage?: string,
 ): string {
+  const prefix = congestionMessage ? `${congestionMessage} ` : ''
   if (status === 'normal') {
-    return `${roadMsg} · ${weatherMessage} — 주요 지표가 평시 범위 내에서 안정적으로 유지되고 있습니다.`
+    return `${prefix}${roadMsg} · ${weatherMessage} — 주요 지표가 평시 범위 내에서 안정적으로 유지되고 있습니다.`
   }
   if (status === 'caution') {
-    return `${roadMsg} · ${weatherMessage} 상태로, 유동인구가 평시 대비 증가하는 추세입니다.`
+    return `${prefix}${roadMsg} · ${weatherMessage} 상태로, 유동인구가 평시 대비 증가하는 추세입니다.`
   }
-  return `${roadMsg} · ${weatherMessage} 상태와 함께 유동인구 밀집이 감지되어 이상 지수가 상승했습니다.`
+  return `${prefix}${roadMsg} · ${weatherMessage} 상태와 함께 유동인구 밀집이 감지되어 이상 지수가 상승했습니다.`
 }
 
 function clamp(value: number, min: number, max: number): number {

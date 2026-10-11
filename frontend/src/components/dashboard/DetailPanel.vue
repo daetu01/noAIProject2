@@ -3,6 +3,7 @@ import { computed } from 'vue'
 
 import { useRegionStore } from '@/stores/regionStore'
 import { STATUS_META } from '@/utils/status'
+import { congestionMeta } from '@/utils/congestion'
 import { formatNumber, timeAgo } from '@/utils/format'
 import GlassPanel from '@/components/common/GlassPanel.vue'
 import SectionHeading from '@/components/common/SectionHeading.vue'
@@ -52,6 +53,19 @@ const region = computed(() => store.selectedRegion)
           />
         </div>
         <p class="mt-2 font-mono text-[10px] text-ink-500">UPDATED {{ timeAgo(region.updatedAt) }}</p>
+      </div>
+
+      <!-- population congestion -->
+      <div
+        class="flex items-center gap-2 rounded-sm border border-line bg-panel-alt/60 px-3 py-2"
+        :title="region.congestionMessage"
+      >
+        <span class="h-2 w-2 shrink-0 rounded-full" :class="congestionMeta(region.congestionLevel).dot" />
+        <span class="font-mono text-[10px] uppercase tracking-widest text-ink-500">혼잡도</span>
+        <span class="font-mono text-xs font-bold" :class="congestionMeta(region.congestionLevel).color">
+          {{ region.congestionLevel }}
+        </span>
+        <span class="truncate text-[11px] text-ink-500">{{ region.congestionMessage }}</span>
       </div>
 
       <!-- key metrics grid -->

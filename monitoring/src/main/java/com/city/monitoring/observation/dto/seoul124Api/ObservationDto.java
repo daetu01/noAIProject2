@@ -1,4 +1,4 @@
-package com.city.monitoring.observation.dto;
+package com.city.monitoring.observation.dto.seoul124Api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

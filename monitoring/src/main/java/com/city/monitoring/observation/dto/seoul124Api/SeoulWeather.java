@@ -1,6 +1,5 @@
-package com.city.monitoring.observation.dto;
+package com.city.monitoring.observation.dto.seoul124Api;
 
-import com.city.monitoring.observation.domain.WeatherForecastInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 

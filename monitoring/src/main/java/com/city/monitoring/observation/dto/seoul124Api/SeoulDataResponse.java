@@ -1,10 +1,16 @@
-package com.city.monitoring.observation.dto;
+package com.city.monitoring.observation.dto.seoul124Api;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SeoulDataResponse {
     @JsonProperty("list_total_count")
     private int listTotalCount;

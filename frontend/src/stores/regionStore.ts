@@ -6,6 +6,7 @@ import { ApiError } from '@/api/http'
 import { createBlankRegion, resolveStatus } from '@/data/regionFactory'
 import type { CityRegion, RegionEvent, SystemStatus } from '@/types/region'
 import { buildCauseSummary, computeAnomalyScore, percentDelta } from '@/utils/liveMapping'
+import { parseBackendDateTime } from '@/utils/format'
 
 export type ConnectionStatus = 'idle' | 'connecting' | 'live' | 'error'
 export type CatalogStatus = 'idle' | 'loading' | 'ready' | 'error'
@@ -134,6 +135,13 @@ export const useRegionStore = defineStore('region', () => {
             ...region.events,
           ].slice(0, EVENT_LIMIT))
 
+    const populationForecast = live.FCST_PPLTN.map((f) => ({
+      time: parseBackendDateTime(f.FCST_TIME),
+      congestionLevel: f.FCST_CONGEST_LVL,
+      populationMin: f.FCST_PPLTN_MIN,
+      populationMax: f.FCST_PPLTN_MAX,
+    }))
+
     Object.assign(region, {
       anomalyScore,
       status,
@@ -143,7 +151,10 @@ export const useRegionStore = defineStore('region', () => {
       trafficDelta: wasLive ? percentDelta(trafficSpeed, region.trafficSpeed) : 0,
       temperature: weather.TEMP,
       weatherMessage: weather.PCP_MSG,
-      causeSummary: buildCauseSummary(status, road.ROAD_MSG, weather.PCP_MSG),
+      congestionLevel: live.AREA_CONGEST_LVL,
+      congestionMessage: live.AREA_CONGEST_MSG,
+      populationForecast,
+      causeSummary: buildCauseSummary(status, road.ROAD_MSG, weather.PCP_MSG, live.AREA_CONGEST_MSG),
       updatedAt: now,
       history: nextHistory,
       events: nextEvents,

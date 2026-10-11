@@ -1,6 +1,6 @@
 package com.city.monitoring.collector.client;
 
-import com.city.monitoring.observation.dto.SeoulDataResponse;
+import com.city.monitoring.observation.dto.seoul124Api.SeoulDataResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

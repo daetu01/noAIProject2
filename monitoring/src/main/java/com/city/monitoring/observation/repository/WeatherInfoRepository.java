@@ -15,4 +15,6 @@ public interface WeatherInfoRepository extends JpaRepository<WeatherInfo, Long> 
             Area area,
             LocalDateTime referenceTime
     );
+
+    Optional<WeatherInfo> findByAreaAndReferenceTime(Area area, LocalDateTime referenceTime);
 }

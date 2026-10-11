@@ -34,6 +34,13 @@ export function formatDate(date: Date): string {
   })
 }
 
+/** Backend sends "yyyy-MM-dd HH:mm" (no timezone) — treat as local time and normalize to ISO. */
+export function parseBackendDateTime(raw: string): string {
+  const iso = raw.includes('T') ? raw : raw.replace(' ', 'T')
+  const date = new Date(iso)
+  return Number.isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString()
+}
+
 export function timeAgo(iso: string): string {
   const diffMs = Date.now() - new Date(iso).getTime()
   const minutes = Math.floor(diffMs / 60000)
